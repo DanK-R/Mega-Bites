@@ -9,12 +9,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.hackfrostletsgo.databinding.FragmentSecondBinding;
 
-public class SecondFragment extends Fragment {
+public class SecondFragment extends Fragment implements AppCompatActivity {
     String Country, schoolname, name;
 
     EditText nameinput;
@@ -34,22 +35,23 @@ public class SecondFragment extends Fragment {
         nameinput = (EditText) findViewById(R.id.nameinput);
 
         submit = (Button) findViewById(R.id.submit);
-        prevous = (Button)
+        prevous = (Button) findViewById((R.id.prevous));
     }
+        @Override
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                name = nameinput.getText().toString();
-                schoolname = schoolnameinput.getText().toString();
-                Country = countrynameinput.getText().toString();
+            public void onClick(View view){
+            name = nameinput.getText().toString();
+            schoolname = schoolnameinput.getText().toString();
+            Country = countrynameinput.getText().toString();
 
-                showToast(Country);
-                showToast(schoolname);
-                showToast(name);
-            }
+            showToast(Country);
+            showToast(schoolname);
+            showToast(name);
+          }
         });
 
-    }
+
     private FragmentSecondBinding binding;
 
     @Override

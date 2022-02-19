@@ -7,7 +7,7 @@
     tools:context=".SecondFragment">
 
     <Button
-        android:id="@+id/prevousP2"
+        android:id="@+id/prevous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/previous"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.188" />
 
     <Button
-        android:id="@+id/Submit"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
