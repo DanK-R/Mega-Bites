@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.hackfrostletsgo.databinding.FragmentSecondBinding;
 
-public class SecondFragment extends Fragment implements AppCompatActivity {
+    public class SecondFragment extends AppCompatActivity {
     String Country, schoolname, name;
 
     EditText nameinput;
@@ -36,53 +36,25 @@ public class SecondFragment extends Fragment implements AppCompatActivity {
 
         submit = (Button) findViewById(R.id.submit);
         prevous = (Button) findViewById((R.id.prevous));
-    }
-        @Override
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            name = nameinput.getText().toString();
-            schoolname = schoolnameinput.getText().toString();
-            Country = countrynameinput.getText().toString();
-
-            showToast(Country);
-            showToast(schoolname);
-            showToast(name);
-          }
-        });
 
 
-    private FragmentSecondBinding binding;
-
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        binding.submit.setOnClickListener(new View.OnClickListener() {
+                submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                name = nameinput.getText().toString();
+                schoolname = schoolnameinput.getText().toString();
+                Country = countrynameinput.getText().toString();
+
+                showToast(Country);
+                showToast(schoolname);
+                showToast(name);
             }
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
+
     private void showToast(String text){
-        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

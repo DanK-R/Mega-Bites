@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "369402262938",
-    "project_id": "mega-bites",
-    "storage_bucket": "mega-bites.appspot.com"
+    "project_number": "202361843633",
+    "project_id": "mega-bites-eedb7",
+    "storage_bucket": "mega-bites-eedb7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:369402262938:android:697770f561c47a55657623",
+        "mobilesdk_app_id": "1:202361843633:android:0a2a43768ce949656a5790",
         "android_client_info": {
           "package_name": "com.example.hackfrostletsgo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "369402262938-lhe3s07ruq4s80atdefqm4v5plbf8qmb.apps.googleusercontent.com",
+          "client_id": "202361843633-gqibj2ahbvau8768m5gsfa9l3k2vh7ri.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYF7EDdk2iwhusvYW_1xTW6uNHHDg-OMM"
+          "current_key": "AIzaSyAuAIX-ahiUwcLWZm84R_H91ZVyoRlUp9g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "369402262938-lhe3s07ruq4s80atdefqm4v5plbf8qmb.apps.googleusercontent.com",
+              "client_id": "202361843633-gqibj2ahbvau8768m5gsfa9l3k2vh7ri.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
