@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,7 +15,41 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.hackfrostletsgo.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {
+    String Country, schoolname, name;
 
+    EditText nameinput;
+    EditText schoolnameinput;
+    EditText countrynameinput;
+
+    Button submit;
+    Button prevous;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_second);
+
+        countrynameinput = (EditText) findViewById(R.id.countrynameinput);
+        schoolnameinput = (EditText) findViewById(R.id.schoolnameinput);
+        nameinput = (EditText) findViewById(R.id.nameinput);
+
+        submit = (Button) findViewById(R.id.submit);
+        prevous = (Button)
+    }
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name = nameinput.getText().toString();
+                schoolname = schoolnameinput.getText().toString();
+                Country = countrynameinput.getText().toString();
+
+                showToast(Country);
+                showToast(schoolname);
+                showToast(name);
+            }
+        });
+
+    }
     private FragmentSecondBinding binding;
 
     @Override
@@ -29,7 +66,7 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        binding.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)
@@ -43,5 +80,7 @@ public class SecondFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
+    private void showToast(String text){
+        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+    }
 }
