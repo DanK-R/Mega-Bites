@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_lessons_Scroll"
             app:destination="@id/lessons_Scroll" />
+        <action
+            android:id="@+id/action_FirstFragment_to_uploader"
+            app:destination="@id/uploader" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -31,4 +34,9 @@
         android:name="com.example.hackfrostletsgo.Lessons_Scroll"
         android:label="fragment_lessons__scroll"
         tools:layout="@layout/fragment_lessons__scroll" />
+    <activity
+        android:id="@+id/uploader"
+        android:name="com.example.hackfrostletsgo.Uploader"
+        android:label="activity_uploader"
+        tools:layout="@layout/activity_uploader" />
 </navigation>
