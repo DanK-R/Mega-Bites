@@ -6,29 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/settingsicon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
     <Button
         android:id="@+id/uploadlesson"
         android:layout_width="174dp"
         android:layout_height="104dp"
+        android:onClick="Firebase"
         android:text="Upload a Lesson"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33"
-        android:onClick="Firebase"/>
+        app:layout_constraintVertical_bias="0.33" />
 
     <Button
         android:id="@+id/ViewLesson"
@@ -39,6 +28,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uploadlesson" />
+
+    <ImageButton
+        android:id="@+id/settingsicon"
+        android:layout_width="47dp"
+        android:layout_height="49dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/settingsicon"
+        tools:layout_editor_absoluteX="348dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

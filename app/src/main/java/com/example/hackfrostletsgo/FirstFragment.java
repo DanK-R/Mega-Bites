@@ -30,6 +30,14 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.settingsicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_activity_settings);
+            }
+        });
+
         binding.uploadlesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +45,7 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_uploader);
             }
         });
+
     }
 
 

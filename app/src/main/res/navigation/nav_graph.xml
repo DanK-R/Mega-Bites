@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_uploader"
             app:destination="@id/uploader" />
+        <action
+            android:id="@+id/action_FirstFragment_to_activity_settings"
+            app:destination="@id/activity_settings" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -39,4 +42,9 @@
         android:name="com.example.hackfrostletsgo.Uploader"
         android:label="activity_uploader"
         tools:layout="@layout/activity_uploader" />
+    <activity
+        android:id="@+id/activity_settings"
+        android:name="com.example.hackfrostletsgo.activitysettings"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" />
 </navigation>
