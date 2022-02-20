@@ -4,30 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".FirstFragment"
+    android:background="@drawable/woodbc">
 
     <Button
         android:id="@+id/uploadlesson"
-        android:layout_width="174dp"
-        android:layout_height="104dp"
+        android:layout_width="250dp"
+        android:layout_height="65dp"
         android:onClick="Firebase"
         android:text="Upload a Lesson"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintVertical_bias="0.674" />
 
     <Button
         android:id="@+id/ViewLesson"
-        android:layout_width="170dp"
-        android:layout_height="105dp"
+        android:layout_width="250dp"
+        android:layout_height="65dp"
         android:text="View a Lesson"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadlesson" />
+        app:layout_constraintTop_toBottomOf="@+id/uploadlesson"
+        app:layout_constraintVertical_bias="0.263" />
 
     <ImageButton
         android:id="@+id/settingsicon"
@@ -37,6 +40,18 @@
         android:src="@drawable/settingsicon"
         tools:layout_editor_absoluteX="348dp"
         tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="352dp"
+        android:layout_height="236dp"
+        android:src="@drawable/heading1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

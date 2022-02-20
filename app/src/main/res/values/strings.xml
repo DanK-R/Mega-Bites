@@ -104,4 +104,11 @@
     <string name="upload_country">Name</string>
     <string name="upload_name">Name</string>
     <string name="up_file">File.eg</string>
+    <string name="messages_header">settings</string>
+    <string name="signature_title">Languages</string>
+    <string name="reply_title">Religion</string>
+    <string name="sync_header">Additional Features</string>
+    <string name="attachment_title">Allow Camera to be used in app</string>
+    <string name="attachment_summary_off">(This app will not be able to access your pictures and videos)</string>
+    <string name="attachment_summary_on">(This app will be able to access your pictures and videos</string>
 </resources>
