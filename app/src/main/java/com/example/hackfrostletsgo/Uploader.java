@@ -147,7 +147,6 @@ public class Uploader extends AppCompatActivity {
                 user.put("country", up_country.getText().toString());
                 user.put("school", up_school.getText().toString());
                 user.put("name", up_name.getText().toString());
-                user.put("path", "temp");
 
                 // Add a new document with a generated ID
                 db.collection("users")

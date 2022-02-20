@@ -52,39 +52,35 @@
         android:id="@+id/up_select"
         android:layout_width="220dp"
         android:layout_height="51dp"
+        android:layout_marginTop="152dp"
         android:text="Select Document"
-        app:layout_constraintBottom_toTopOf="@+id/up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_file"
-        app:layout_constraintVertical_bias="0.964" />
+        app:layout_constraintTop_toBottomOf="@+id/up_file" />
 
     <Button
         android:id="@+id/up_button"
         android:layout_width="171dp"
         android:layout_height="78dp"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="30dp"
         android:text="Upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_file" />
+        app:layout_constraintTop_toBottomOf="@+id/up_select" />
 
     <TextView
         android:id="@+id/up_file"
         android:layout_width="215dp"
         android:layout_height="42dp"
         android:layout_marginTop="23dp"
-        android:layout_marginBottom="7dp"
         android:text="@string/up_file"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_name"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/up_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

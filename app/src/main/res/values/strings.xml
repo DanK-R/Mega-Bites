@@ -113,4 +113,7 @@
     <string name="attachment_summary_on">(This app will be able to access your pictures and videos</string>
     <string name="title_activity_lessons">Lessons</string>
     <string name="lessons">Lessons</string>
+    <string name="t_1"> </string>
+    <string name="t_2"> </string>
+    <string name="t_3"> </string>
 </resources>
