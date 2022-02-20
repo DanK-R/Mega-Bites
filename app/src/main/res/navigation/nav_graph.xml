@@ -11,32 +11,15 @@
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment2"
-            app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_FirstFragment_to_lessons_Scroll"
-            app:destination="@id/lessons_Scroll" />
-        <action
             android:id="@+id/action_FirstFragment_to_uploader"
             app:destination="@id/uploader" />
         <action
             android:id="@+id/action_FirstFragment_to_activity_settings"
             app:destination="@id/activity_settings" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.hackfrostletsgo.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment2"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_lessons22"
+            app:destination="@id/lessons22" />
     </fragment>
-    <fragment
-        android:id="@+id/lessons_Scroll"
-        android:name="com.example.hackfrostletsgo.Lessons_Scroll"
-        android:label="fragment_lessons__scroll"
-        tools:layout="@layout/fragment_lessons__scroll" />
     <activity
         android:id="@+id/uploader"
         android:name="com.example.hackfrostletsgo.Uploader"
@@ -47,4 +30,9 @@
         android:name="com.example.hackfrostletsgo.activitysettings"
         android:label="activity_settings"
         tools:layout="@layout/activity_settings" />
+    <activity
+        android:id="@+id/lessons22"
+        android:name="com.example.hackfrostletsgo.Lessons2"
+        android:label="activity_lessons2"
+        tools:layout="@layout/activity_lessons2" />
 </navigation>

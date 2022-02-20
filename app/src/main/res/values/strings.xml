@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hackfrostLetsGo</string>
+    <string name="app_name">KnowMore</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -111,4 +111,6 @@
     <string name="attachment_title">Allow Camera to be used in app</string>
     <string name="attachment_summary_off">(This app will not be able to access your pictures and videos)</string>
     <string name="attachment_summary_on">(This app will be able to access your pictures and videos</string>
+    <string name="title_activity_lessons">Lessons</string>
+    <string name="lessons">Lessons</string>
 </resources>

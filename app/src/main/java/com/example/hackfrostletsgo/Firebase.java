@@ -43,7 +43,7 @@ public class Firebase extends AppCompatActivity {
                         Log.w("Firebase", "Error adding document", e);
                     }
                 });
-        setContentView(R.layout.activity_firebase);
+
     }
 
 
