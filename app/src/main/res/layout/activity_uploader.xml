@@ -6,10 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Uploader">
 
+    <EditText
+        android:id="@+id/up_name"
+        android:layout_width="236dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="87dp"
+        android:ems="10"
+        android:hint="Enter Your Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_school" />
+
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="239dp"
-        android:layout_height="90dp"
+        android:id="@+id/up_country"
+        android:layout_width="235dp"
+        android:layout_height="60dp"
         android:layout_marginStart="86dp"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="86dp"
@@ -17,4 +31,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/up_school"
+        android:layout_width="236dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="87dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Enter School Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/up_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_country" />
+
+    <Button
+        android:id="@+id/up_button"
+        android:layout_width="171dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="120dp"
+        android:text="Upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
