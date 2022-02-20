@@ -1,10 +1,7 @@
 package com.example.hackfrostletsgo;
 
 import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCaller;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -34,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -45,8 +44,10 @@ import java.util.Map;
 public class Uploader extends AppCompatActivity {
 
     private Button btn;
-    private Button btn_select;
-    private TextView up_file = findViewById(R.id.up_file);
+    private TextView up_file;
+    protected final BetterActivityResult<Intent, ActivityResult> activityLauncher = BetterActivityResult.registerActivityForResult(this);
+
+
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
@@ -55,16 +56,35 @@ public class Uploader extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploader);
         btn =  findViewById(R.id.up_button);
-        btn_select =  findViewById(R.id.up_select);
+        up_file = findViewById(R.id.up_file);
+        Button btn_select = (Button) findViewById(R.id.up_select);
 
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("uploadPDF");
         btn.setEnabled(false);
+        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+
+                        }
+                    }
+
+                });
 
 
-        btn_select.setOnClickListener(view -> selectFile());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+        btn_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFile();
+            }
+        });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, COUNTRIES);
         AutoCompleteTextView textView = findViewById(R.id.up_country);
         textView.setAdapter(adapter);
@@ -72,51 +92,56 @@ public class Uploader extends AppCompatActivity {
     }
     public void selectFile()
     {
-        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        btn.setEnabled(true);
-                        up_file.setText(data.getDataString().substring(data.getDataString().lastIndexOf("/") + 1));
 
-                        btn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                uploadPDFFileFirebase(data.getData());
-                                EditText up_country = (EditText) findViewById(R.id.up_country);
-                                EditText up_school = (EditText) findViewById(R.id.up_school);
-                                EditText up_name = (EditText) findViewById(R.id.up_name);
 
-                                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                Map<String, Object> user = new HashMap<>();
-                                user.put("country", up_country.getText().toString());
-                                user.put("school", up_school.getText().toString());
-                                user.put("name", up_name.getText().toString());
-                                user.put("path", "temp");
+    }
+    public void openSomeActivityForResult() {
+        Intent intent = new Intent(this, Uploader.class);
+        activityLauncher.launch(intent, result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                // There are no request codes
+                Intent data = result.getData();
+                btn.setEnabled(true);
+                up_file.setText(data.getDataString().substring(data.getDataString().lastIndexOf("/") + 1));
 
-                                // Add a new document with a generated ID
-                                db.collection("users")
-                                        .add(user)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Log.d("onClick", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w("onClick", "Error adding document", e);
-                                            }
-                                        });
 
-                            }
-                        });
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        uploadPDFFileFirebase(data.getData());
+                        EditText up_country = (EditText) findViewById(R.id.up_country);
+                        EditText up_school = (EditText) findViewById(R.id.up_school);
+                        EditText up_name = (EditText) findViewById(R.id.up_name);
+
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("country", up_country.getText().toString());
+                        user.put("school", up_school.getText().toString());
+                        user.put("name", up_name.getText().toString());
+                        user.put("path", "temp");
+
+                        // Add a new document with a generated ID
+                        db.collection("users")
+                                .add(user)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d("onClick", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("onClick", "Error adding document", e);
+                                    }
+                                });
+
                     }
                 });
-
+                doSomeOperations();
+            }
+        })
     }
 
     private void uploadPDFFileFirebase(Uri data)
