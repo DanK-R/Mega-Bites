@@ -17,6 +17,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.navigation.fragment.NavHostFragment;
+
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -230,6 +232,7 @@ public class Uploader extends AppCompatActivity {
                         databaseReference.child(Objects.requireNonNull(databaseReference.push().getKey())).setValue(putFile);
                         Toast.makeText(Uploader.this, "File Upload", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
+                        finish();
 
 
                     }
