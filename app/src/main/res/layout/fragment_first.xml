@@ -36,10 +36,12 @@
         android:id="@+id/settingsicon"
         android:layout_width="47dp"
         android:layout_height="49dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="16dp"
         android:scaleType="fitCenter"
         android:src="@drawable/settingsicon"
-        tools:layout_editor_absoluteX="348dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
