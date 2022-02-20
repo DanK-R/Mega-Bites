@@ -103,4 +103,5 @@
     <string name="upload_school">Name</string>
     <string name="upload_country">Name</string>
     <string name="upload_name">Name</string>
+    <string name="up_file">File.eg</string>
 </resources>

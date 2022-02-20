@@ -10,9 +10,7 @@
         android:id="@+id/up_name"
         android:layout_width="236dp"
         android:layout_height="54dp"
-        android:layout_marginStart="88dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="87dp"
         android:ems="10"
         android:hint="Enter Your Name"
         android:inputType="textPersonName"
@@ -24,9 +22,7 @@
         android:id="@+id/up_country"
         android:layout_width="235dp"
         android:layout_height="60dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="86dp"
+        android:layout_marginTop="148dp"
         android:hint="Enter Your Country"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +30,9 @@
 
     <EditText
         android:id="@+id/up_school"
-        android:layout_width="236dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="88dp"
+        android:layout_width="237dp"
+        android:layout_height="49dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="87dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="Enter School Name"
@@ -49,14 +43,39 @@
         app:layout_constraintTop_toBottomOf="@+id/up_country" />
 
     <Button
+        android:id="@+id/up_select"
+        android:layout_width="220dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="48dp"
+        android:text="Select Document"
+        app:layout_constraintBottom_toTopOf="@+id/up_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_file" />
+
+    <Button
         android:id="@+id/up_button"
         android:layout_width="171dp"
         android:layout_height="78dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="48dp"
         android:text="Upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_name" />
+        app:layout_constraintTop_toBottomOf="@+id/up_select" />
+
+    <TextView
+        android:id="@+id/up_file"
+        android:layout_width="215dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="7dp"
+        android:text="@string/up_file"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/up_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_name"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
