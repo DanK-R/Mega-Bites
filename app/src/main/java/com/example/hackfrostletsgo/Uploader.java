@@ -1,29 +1,27 @@
 package com.example.hackfrostletsgo;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
+import androidx.core.app.ActivityCompat;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,56 +29,95 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Uploader extends AppCompatActivity {
-
-    private Button btn;
-    private TextView up_file;
-    protected final BetterActivityResult<Intent, ActivityResult> activityLauncher = BetterActivityResult.registerActivityForResult(this);
-
+    //protected final BetterActivityResult<Intent, ActivityResult> activityLauncher = BetterActivityResult.registerActivityForResult(this);
+    ActivityResultLauncher<Intent> resultLauncher;
 
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
 
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Find", "running");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploader);
-        btn =  findViewById(R.id.up_button);
-        up_file = findViewById(R.id.up_file);
-        Button btn_select = (Button) findViewById(R.id.up_select);
+
+
+
+        Button btn_select = findViewById(R.id.up_select);
+
+        Button btn = findViewById(R.id.up_button);
+        TextView up_file = findViewById(R.id.up_file);
+        EditText up_country = findViewById(R.id.up_country);
+        EditText up_school = findViewById(R.id.up_school);
+        EditText up_name = findViewById(R.id.up_name);
+
 
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("uploadPDF");
         btn.setEnabled(false);
-        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
+
+        resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            // There are no request codes
+                    public void onActivityResult(ActivityResult result)
+                    {
 
-                        }
+                        // Initialize result data
+                        //if(!up_country.getText().toString().equals("Enter Your Country") && !up_school.getText().toString().equals("Enter School Name") && !up_name.getText().toString().equals("Enter Your Name")) {
+                            Intent data = result.getData();
+
+                            // check condition
+                            if (data != null) {
+                                // When data is not equal to empty
+                                // Get PDf uri
+                                Uri sUri = data.getData();
+                                // set Uri on text view
+                                up_file.setText(Html.fromHtml(
+                                        "<big><b>PDF Uri</b></big><br>"
+                                                + sUri));
+                                btn.setEnabled(true);
+                                upload(sUri, up_file, btn, up_country, up_school, up_name);
+
+                                // Get PDF path
+                                //String sPath = sUri.getPath();
+
+                                // Set path on text view
+                                //up..setText(Html.fromHtml(
+                                //        "<big><b>PDF Path</b></big><br>"
+                                //                + sPath));
+                            }
+
+                        //}
                     }
-
-                });
-
-
+        });
 
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectFile();
+                // check condition
+                if (ActivityCompat.checkSelfPermission(Uploader.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    // When permission is not granted
+                    // Result permission
+                    ActivityCompat.requestPermissions(
+                            Uploader.this,
+                            new String[] {
+                                    Manifest.permission
+                                            .READ_EXTERNAL_STORAGE },
+                            1);
+                }
+                else {
+                    // When permission is granted
+                    // Create method
+                    selectPDF();
+                }
             }
         });
 
@@ -90,62 +127,90 @@ public class Uploader extends AppCompatActivity {
         textView.setAdapter(adapter);
 
     }
-    public void selectFile()
+
+    private void upload(Uri sUri,TextView up_file, Button btn,EditText up_country,EditText up_school,EditText up_name)
     {
 
+        btn.setOnClickListener(new View.OnClickListener()
 
-    }
-    public void openSomeActivityForResult() {
-        Intent intent = new Intent(this, Uploader.class);
-        activityLauncher.launch(intent, result -> {
-            if (result.getResultCode() == Activity.RESULT_OK) {
-                // There are no request codes
-                Intent data = result.getData();
-                btn.setEnabled(true);
-                up_file.setText(data.getDataString().substring(data.getDataString().lastIndexOf("/") + 1));
+        {
+            @Override
+            public void onClick(View view)
+            {
+                uploadPDFFileFirebase(sUri, up_file);
 
 
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                Map<String, Object> user = new HashMap<>();
+                user.put("country", up_country.getText().toString());
+                user.put("school", up_school.getText().toString());
+                user.put("name", up_name.getText().toString());
+                user.put("path", "temp");
 
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        uploadPDFFileFirebase(data.getData());
-                        EditText up_country = (EditText) findViewById(R.id.up_country);
-                        EditText up_school = (EditText) findViewById(R.id.up_school);
-                        EditText up_name = (EditText) findViewById(R.id.up_name);
-
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("country", up_country.getText().toString());
-                        user.put("school", up_school.getText().toString());
-                        user.put("name", up_name.getText().toString());
-                        user.put("path", "temp");
-
-                        // Add a new document with a generated ID
-                        db.collection("users")
-                                .add(user)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Log.d("onClick", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w("onClick", "Error adding document", e);
-                                    }
-                                });
-
-                    }
-                });
-                doSomeOperations();
+                // Add a new document with a generated ID
+                db.collection("users")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>()
+                        {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference)
+                            {
+                                Log.d("onClick", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener()
+                        {
+                            @Override
+                            public void onFailure(@NonNull Exception e)
+                            {
+                                Log.w("onClick", "Error adding document", e);
+                            }
+                        });
             }
-        })
+        });
     }
 
-    private void uploadPDFFileFirebase(Uri data)
+    private void selectPDF()
     {
+        // Initialize intent
+        Intent intent
+                = new Intent(Intent.ACTION_GET_CONTENT);
+        // set type
+        intent.setType("application/pdf");
+        // Launch intent
+        resultLauncher.launch(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(
+                requestCode, permissions, grantResults);
+
+        // check condition
+        if (requestCode == 1 && grantResults.length > 0
+                && grantResults[0]
+                == PackageManager.PERMISSION_GRANTED) {
+            // When permission is granted
+            // Call method
+            selectPDF();
+        }
+        else {
+            // When permission is denied
+            // Display toast
+            Toast
+                    .makeText(getApplicationContext(),
+                            "Permission Denied",
+                            Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    private void uploadPDFFileFirebase(Uri data, TextView up_file)
+    {
+
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("file is loading...");
         progressDialog.show();
@@ -162,7 +227,7 @@ public class Uploader extends AppCompatActivity {
                         Uri uri = uriTask.getResult();
 
                         putFile putFile = new putFile(up_file.getText().toString(), uri.toString());
-                        databaseReference.child(databaseReference.push().getKey()).setValue(putFile);
+                        databaseReference.child(Objects.requireNonNull(databaseReference.push().getKey())).setValue(putFile);
                         Toast.makeText(Uploader.this, "File Upload", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
 
